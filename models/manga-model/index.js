@@ -1,42 +1,43 @@
 import { sequelize } from "../../core/db.js";
 import Sequelize from "sequelize";
-import { MangaModel } from "../manga-model/index.js";
-import { TeamModel } from "../team-model/index.js";
 import { ImagesChapterModel } from "../images-chapter-model/index.js";
 import { ChapterModel } from "../chapter-model/index.js";
 
-export const UserModel = sequelize.define("users", {
+export const MangaModel = sequelize.define("mangas", {
   id: {
     primaryKey: true,
     autoIncrement: true,
     allowNull: false,
     type: Sequelize.INTEGER,
   },
-  name: {
+  title: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  email: {
+  foreignTitle: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  password: {
+  status: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    defaultValue: "Продолжается",
+  },
+  mangaDescription: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  avatar: {
+  yearOfIssue: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  mangaCover: {
     type: Sequelize.STRING,
     defaultValue: "",
   },
 });
-UserModel.hasMany(MangaModel);
-MangaModel.belongsTo(UserModel);
+MangaModel.hasMany(ChapterModel);
+ChapterModel.belongsTo(MangaModel);
 
-UserModel.hasMany(TeamModel);
-TeamModel.belongsTo(UserModel);
-
-UserModel.hasMany(ChapterModel);
-ChapterModel.belongsTo(UserModel);
-
-UserModel.hasMany(ImagesChapterModel);
-ImagesChapterModel.belongsTo(UserModel);
+MangaModel.hasMany(ImagesChapterModel);
+ImagesChapterModel.belongsTo(MangaModel);
