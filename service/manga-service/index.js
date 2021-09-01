@@ -13,7 +13,8 @@ class MangaService {
   }
   async createManga(
     title,
-    foreignTitle,
+    englishTitle,
+    originalTitle,
     mangaDescription,
     yearOfIssue,
     userId
@@ -25,7 +26,8 @@ class MangaService {
       }
       const newManga = await MangaModel.create({
         title,
-        foreignTitle,
+        englishTitle,
+        originalTitle,
         mangaDescription,
         yearOfIssue,
         userId,

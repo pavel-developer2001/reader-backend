@@ -14,7 +14,11 @@ export const MangaModel = sequelize.define("mangas", {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  foreignTitle: {
+  englishTitle: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  originalTitle: {
     type: Sequelize.STRING,
     allowNull: false,
   },

@@ -11,11 +11,18 @@ class MangaController {
   }
   async createNewManga(req, res) {
     try {
-      const { title, foreignTitle, mangaDescription, yearOfIssue, userId } =
-        req.body;
+      const {
+        title,
+        englishTitle,
+        originalTitle,
+        mangaDescription,
+        yearOfIssue,
+        userId,
+      } = req.body;
       const mangaData = await MangaService.createManga(
         title,
-        foreignTitle,
+        englishTitle,
+        originalTitle,
         mangaDescription,
         yearOfIssue,
         userId
