@@ -11,6 +11,7 @@ class MangaController {
   }
   async createNewManga(req, res) {
     try {
+      console.log("SERVER", req.body, "IMAGE -", req.file);
       const {
         title,
         englishTitle,
