@@ -11,7 +11,6 @@ class MangaController {
   }
   async createNewManga(req, res) {
     try {
-      console.log("SERVER", req.body, "IMAGE -", req.file);
       const {
         title,
         englishTitle,
@@ -20,6 +19,10 @@ class MangaController {
         yearOfIssue,
         userId,
       } = req.body;
+
+      const mangaCover = req.file;
+      const coverData = await CoverService.upload(mangaCover);
+      console.log("COVER", coverData);
       const mangaData = await MangaService.createManga(
         title,
         englishTitle,
@@ -28,8 +31,6 @@ class MangaController {
         yearOfIssue,
         userId
       );
-      const mangaCover = req.file;
-      const coverData = await CoverService.upload(mangaCover);
       return res.json(mangaData, coverData);
     } catch (error) {}
   }
