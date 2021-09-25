@@ -35,5 +35,21 @@ class MangaService {
       return newManga;
     } catch (error) {}
   }
+  async addCover(id, mangaCover) {
+    try {
+      if (!mangaCover) {
+        return null;
+      }
+      await MangaModel.update({ mangaCover }, { where: { id } });
+    } catch (error) {
+      console.log("ERROR ", error);
+    }
+  }
+  async getManga(id) {
+    try {
+      const manga = await MangaModel.findOne({ where: { id } });
+      return manga;
+    } catch (error) {}
+  }
 }
 export default new MangaService();

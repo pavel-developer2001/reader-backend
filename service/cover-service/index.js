@@ -1,8 +1,8 @@
 import cloudinary from "../../core/cloudinary.js";
-
+import MangaService from "../manga-service/index.js";
 class CoverService {
-  async upload(mangaCover) {
-    cloudinary.v2.uploader
+  async upload(id, mangaCover) {
+    await cloudinary.v2.uploader
       .upload_stream({ resource_type: "auto" }, (error, result) => {
         if (error || !result) {
           console.log("ERRRRRRRRRROOOOOOOOORR COVER", error);
@@ -11,8 +11,8 @@ class CoverService {
           //     message: error || "upload error",
           //   });
         }
-        console.log("COVER SERVICE -", result.url);
-        return result.url;
+
+        MangaService.addCover(id, result.url);
         // res.status(201).json({
         //   url: result.url,
         //   size: Math.round(result.bytes / 1024),
@@ -21,6 +21,7 @@ class CoverService {
         // });
       })
       .end(mangaCover.buffer);
+
     //   .end(file.buffer);
   }
 }
