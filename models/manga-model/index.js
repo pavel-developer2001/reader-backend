@@ -28,7 +28,7 @@ export const MangaModel = sequelize.define("mangas", {
     defaultValue: "Продолжается",
   },
   mangaDescription: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING(1500),
     allowNull: false,
   },
   yearOfIssue: {

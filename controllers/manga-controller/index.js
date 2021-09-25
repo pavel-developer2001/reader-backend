@@ -33,5 +33,12 @@ class MangaController {
       return res.json(findNewManga);
     } catch (error) {}
   }
+  async getManga(req, res) {
+    try {
+      const { id } = req.params;
+      const manga = await MangaService.getManga(id);
+      res.json(manga);
+    } catch (error) {}
+  }
 }
 export default new MangaController();

@@ -49,5 +49,11 @@ class UserService {
       return { token, user: userDto };
     } catch (error) {}
   }
+  async getUserData(id) {
+    try {
+      const user = await UserModel.findOne({ where: { id } });
+      return user;
+    } catch (error) {}
+  }
 }
 export default new UserService();

@@ -5,6 +5,7 @@ import { body } from "express-validator";
 const router = new Router();
 
 router.get("/", UserController.getUsers);
+router.get("/:id", UserController.getUser);
 router.post(
   "/registration",
   body("name").isString(),
