@@ -1,4 +1,5 @@
 import cloudinary from "../../core/cloudinary.js";
+import ImagesChapterService from "../images-chapter-service/index.js";
 import MangaService from "../manga-service/index.js";
 class CoverService {
   async upload(id, mangaCover) {
@@ -23,6 +24,16 @@ class CoverService {
       .end(mangaCover.buffer);
 
     //   .end(file.buffer);
+  }
+  async newImageForChapter(chapterId, userId, mangaId, image) {
+    await cloudinary.v2.uploader
+      .upload_stream({ resource_type: "auto" }, (error, result) => {
+        if (error || !result) {
+          console.log("ERRRRRRRRRROOOOOOOOORR COVER", error);
+        }
+        ImagesChapterService.addImage(chapterId, userId, mangaId, result.url);
+      })
+      .end(image.buffer);
   }
 }
 
