@@ -11,7 +11,6 @@ class ChapterController {
   }
   async addChapter(req, res) {
     try {
-      console.log("BODY", req.body, "FILES", req.files);
       const { numberChapter, volumeChapter, mangaId, userId } = req.body;
       const chapter = await ChapterService.newChapter(
         numberChapter,
@@ -19,10 +18,8 @@ class ChapterController {
         mangaId,
         userId
       );
-      const imagesList = req.file;
-      console.log("ImagesList", imagesList);
+      const imagesList = req.files;
       await imagesList.map((image) => {
-        console.log("image", image);
         CoverService.newImageForChapter(
           chapter.id,
           chapter.userId,

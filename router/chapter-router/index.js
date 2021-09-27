@@ -7,7 +7,7 @@ const router = new Router();
 router.get("/", ChapterController.getChapters);
 router.post(
   "/addChapter",
-  upload.array("imagesList"),
+  upload.array("imagesList[]"),
   ChapterController.addChapter
 );
 
