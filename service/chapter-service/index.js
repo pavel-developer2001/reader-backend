@@ -11,11 +11,11 @@ class ChapterService {
       console.log(error);
     }
   }
-  async newChapter(numberChapter, valumeChapter, mangaId, userId) {
+  async newChapter(numberChapter, volumeChapter, mangaId, userId) {
     try {
       const addChapter = await ChapterModel.create({
         numberChapter,
-        valumeChapter,
+        volumeChapter,
         mangaId,
         userId,
       });
