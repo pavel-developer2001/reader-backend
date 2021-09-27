@@ -22,5 +22,11 @@ class ChapterService {
       return addChapter;
     } catch (error) {}
   }
+  async getChapters(id) {
+    try {
+      const chapters = await ChapterModel.findAll({ where: { mangaId: id } });
+      return chapters;
+    } catch (error) {}
+  }
 }
 export default new ChapterService();

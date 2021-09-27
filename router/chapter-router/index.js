@@ -10,5 +10,7 @@ router.post(
   upload.array("imagesList[]"),
   ChapterController.addChapter
 );
+router.get("/:id", ChapterController.getAllChapterToManga);
+router.get("/images/:id", ChapterController.getAllImagesForChapter);
 
 export { router };
