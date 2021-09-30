@@ -4,7 +4,7 @@ import { upload } from "../../utils/upload.js";
 
 const router = new Router();
 
-router.get("/", ChapterController.getChapters);
+router.get("/", ChapterController.getLaterChapterWithMangaData);
 router.post(
   "/addChapter",
   upload.array("imagesList[]"),

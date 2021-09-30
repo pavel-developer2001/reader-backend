@@ -45,5 +45,11 @@ class ChapterController {
       res.status(200).json(images);
     } catch (error) {}
   }
+  async getLaterChapterWithMangaData(req, res) {
+    try {
+      const chapters = await ChapterService.getLaterChapters();
+      res.status(200).json(chapters);
+    } catch (error) {}
+  }
 }
 export default new ChapterController();
