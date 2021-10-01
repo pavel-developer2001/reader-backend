@@ -33,9 +33,12 @@ class ChapterService {
     try {
       const chapters = await ChapterModel.findAll({
         include: [{ model: MangaModel }],
+        order: [["id", "DESC"]],
       });
       return chapters;
-    } catch (error) {}
+    } catch (error) {
+      console.log("ERROR", error);
+    }
   }
 }
 export default new ChapterService();

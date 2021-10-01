@@ -8,5 +8,26 @@ class BookMarksController {
       return res.json(bookMarks);
     } catch (error) {}
   }
+  async addCreateMarksForUser(req, res) {
+    try {
+      const { category, mangaId, userId } = req.body;
+      const mark = await BookMarksService.createMarks(
+        category,
+        mangaId,
+        userId
+      );
+      res.status(200).json(mark);
+    } catch (error) {}
+  }
+  async getAllMarksForUser(req, res) {
+    const { id } = req.params;
+    const marks = await BookMarksService.getMarks(id);
+    return res.status(200).json(marks);
+  }
+  async updateMarkForManga(req, res) {
+    const { category, mangaId, userId } = req.body;
+    const mark = await BookMarksService.updateMark(category, mangaId, userId);
+    res.status(200).json(mark);
+  }
 }
 export default new BookMarksController();
