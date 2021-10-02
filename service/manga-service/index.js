@@ -16,6 +16,9 @@ class MangaService {
     englishTitle,
     originalTitle,
     mangaDescription,
+    typeManga,
+    statusManga,
+    ageRatingManga,
     yearOfIssue,
     userId
   ) {
@@ -29,6 +32,9 @@ class MangaService {
         englishTitle,
         originalTitle,
         mangaDescription,
+        typeManga,
+        statusManga,
+        ageRatingManga,
         yearOfIssue,
         userId,
       });

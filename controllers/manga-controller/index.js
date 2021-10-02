@@ -1,7 +1,8 @@
 import MangaService from "../../service/manga-service/index.js";
 import ApiError from "../../exceptions/api-error/index.js";
 import CoverService from "../../service/cover-service/index.js";
-
+import GenresService from "../../service/genres-service/index.js";
+import TagsService from "../../service/tags-service/index.js";
 class MangaController {
   async getMangas(req, res) {
     try {
@@ -16,6 +17,11 @@ class MangaController {
         englishTitle,
         originalTitle,
         mangaDescription,
+        typeManga,
+        statusManga,
+        ageRatingManga,
+        genres,
+        tags,
         yearOfIssue,
         userId,
       } = req.body;
@@ -24,9 +30,16 @@ class MangaController {
         englishTitle,
         originalTitle,
         mangaDescription,
+        typeManga,
+        statusManga,
+        ageRatingManga,
         yearOfIssue,
         userId
       );
+      await genres.map((genre) =>
+        GenresService.addGenresForManga(genre, mangaData.id)
+      );
+      await tags.map((tag) => TagsService.addTagsForManga(tag, mangaData.id));
       const mangaCover = req.file;
       await CoverService.upload(mangaData.id, mangaCover);
       const findNewManga = await MangaService.getManga(mangaData.id);
