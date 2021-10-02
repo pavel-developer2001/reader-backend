@@ -50,7 +50,9 @@ class MangaController {
     try {
       const { id } = req.params;
       const manga = await MangaService.getManga(id);
-      res.json(manga);
+      const genre = await GenresService.getAllGenresForManga(id);
+      const tag = await TagsService.getTagsForManga(id);
+      res.json({ manga, genre, tag });
     } catch (error) {}
   }
 }

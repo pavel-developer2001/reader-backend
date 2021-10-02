@@ -1,6 +1,8 @@
 import { MangaModel } from "../../models/manga-model/index.js";
 
 import ApiError from "../../exceptions/api-error/index.js";
+import { GenresModel } from "../../models/genres-model/index.js";
+import { TagsModel } from "../../models/tags-model/index.js";
 
 class MangaService {
   async getAllMangas() {

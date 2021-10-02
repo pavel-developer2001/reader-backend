@@ -10,5 +10,11 @@ class GenresService {
       console.log(error);
     }
   }
+  async getAllGenresForManga(id) {
+    try {
+      const genres = await GenresModel.findAll({ where: { mangaId: id } });
+      return genres;
+    } catch (error) {}
+  }
 }
 export default new GenresService();

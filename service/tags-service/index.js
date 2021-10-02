@@ -10,5 +10,11 @@ class TagsService {
       console.log(error);
     }
   }
+  async getTagsForManga(id) {
+    try {
+      const tags = await TagsModel.findAll({ where: { mangaId: id } });
+      return tags;
+    } catch (error) {}
+  }
 }
 export default new TagsService();
