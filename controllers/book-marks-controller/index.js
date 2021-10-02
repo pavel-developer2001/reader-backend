@@ -29,5 +29,13 @@ class BookMarksController {
     const mark = await BookMarksService.updateMark(category, mangaId, userId);
     res.status(200).json(mark);
   }
+  async getBookMarkForManga(req, res) {
+    try {
+      const { id } = req.params;
+      const { userId } = req.query;
+      const mark = await BookMarksService.getMarkForManga(id, userId);
+      res.status(200).json(mark);
+    } catch (error) {}
+  }
 }
 export default new BookMarksController();

@@ -45,5 +45,15 @@ class BookMarksService {
       return mark;
     } catch (error) {}
   }
+  async getMarkForManga(id, userId) {
+    try {
+      const mark = await BookMarksModel.findOne({
+        where: { mangaId: id, userId },
+      });
+      return mark;
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
 }
 export default new BookMarksService();

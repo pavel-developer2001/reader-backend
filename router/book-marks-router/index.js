@@ -5,6 +5,7 @@ const router = new Router();
 router.get("/", BookMarksController.getBookMarks);
 router.post("/add", BookMarksController.addCreateMarksForUser);
 router.get("/:id", BookMarksController.getAllMarksForUser);
+router.get("/manga/:id", BookMarksController.getBookMarkForManga);
 router.patch("/change", BookMarksController.updateMarkForManga);
 
 export { router };
