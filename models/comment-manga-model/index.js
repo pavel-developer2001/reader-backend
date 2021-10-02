@@ -16,4 +16,9 @@ export const CommentMangaModel = sequelize.define("comments-manga", {
     type: Sequelize.BOOLEAN,
     allowNull: false,
   },
+  countLikes: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    defaultValue: 0,
+  },
 });
