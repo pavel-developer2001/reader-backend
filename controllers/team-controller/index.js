@@ -1,4 +1,6 @@
 import TeamService from "../../service/team-service/index.js";
+import CoverService from "../../service/cover-service/index.js";
+import TeamMemberService from "../../service/team-member-service/index.js";
 import ApiError from "../../exceptions/api-error/index.js";
 
 class TeamController {
