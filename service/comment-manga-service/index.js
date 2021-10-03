@@ -5,11 +5,15 @@ import { UserModel } from "../../models/user-model/index.js";
 class CommentMangaService {
   async addComment(commentText, spoiler, mangaId, userId) {
     try {
-      const comment = await CommentMangaModel.create({
+      const addComment = await CommentMangaModel.create({
         commentText,
         spoiler,
         mangaId,
         userId,
+      });
+      const comment = await CommentMangaModel.findOne({
+        where: { id: addComment.id },
+        include: [{ model: UserModel }],
       });
       return comment;
     } catch (error) {}

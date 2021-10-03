@@ -3,6 +3,8 @@ import Sequelize from "sequelize";
 import { ImagesChapterModel } from "../images-chapter-model/index.js";
 import { MangaModel } from "../manga-model/index.js";
 import { ChapterModel } from "../chapter-model/index.js";
+import { TeamMemberModel } from "../team-member-model/index.js";
+import { TeamManga } from "../team-manga-model/index.js";
 
 export const TeamModel = sequelize.define("teams", {
   id: {
@@ -11,12 +13,26 @@ export const TeamModel = sequelize.define("teams", {
     allowNull: false,
     type: Sequelize.INTEGER,
   },
-  name: {
+  teamName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  teamSubtitle: {
     type: Sequelize.STRING,
     allowNull: false,
   },
   teamDescription: {
     type: Sequelize.STRING,
+    allowNull: false,
+  },
+  teamCover: {
+    type: Sequelize.STRING,
+    defaultValue: "",
+    allowNull: false,
+  },
+  teamRank: {
+    type: Sequelize.STRING,
+    defaultValue: "Бронзовый",
     allowNull: false,
   },
 });
@@ -28,3 +44,9 @@ ChapterModel.belongsTo(TeamModel);
 
 TeamModel.hasMany(MangaModel);
 MangaModel.belongsTo(TeamModel);
+
+TeamModel.hasMany(TeamMemberModel);
+TeamMemberModel.belongsTo(TeamModel);
+
+TeamModel.hasMany(TeamManga);
+TeamManga.belongsTo(TeamModel);

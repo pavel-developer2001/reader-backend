@@ -7,6 +7,7 @@ import { ChapterModel } from "../chapter-model/index.js";
 import { BookMarksModel } from "../book-marks-model/index.js";
 import { RatingMangaModel } from "../rating-manga-model/index.js";
 import { CommentMangaModel } from "../comment-manga-model/index.js";
+import { TeamMemberModel } from "../team-member-model/index.js";
 
 export const UserModel = sequelize.define("users", {
   id: {
@@ -52,3 +53,6 @@ RatingMangaModel.belongsTo(UserModel);
 
 UserModel.hasMany(CommentMangaModel);
 CommentMangaModel.belongsTo(UserModel);
+
+UserModel.hasMany(TeamMemberModel);
+TeamMemberModel.belongsTo(UserModel);

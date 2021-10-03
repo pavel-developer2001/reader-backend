@@ -1,6 +1,7 @@
 import cloudinary from "../../core/cloudinary.js";
 import ImagesChapterService from "../images-chapter-service/index.js";
 import MangaService from "../manga-service/index.js";
+import TeamService from "../team-service/index.js";
 class CoverService {
   async upload(id, mangaCover) {
     await cloudinary.v2.uploader
@@ -34,6 +35,16 @@ class CoverService {
         ImagesChapterService.addImage(chapterId, userId, mangaId, result.url);
       })
       .end(image.buffer);
+  }
+  async uploadForTeam(id, teamCover) {
+    await cloudinary.v2.uploader
+      .upload_stream({ resource_type: "auto" }, (error, result) => {
+        if (error || !result) {
+          console.log("ERRRRRRRRRROOOOOOOOORR COVER", error);
+        }
+        TeamService.addCover(id, result.url);
+      })
+      .end(teamCover.buffer);
   }
 }
 
