@@ -26,5 +26,19 @@ class TeamController {
       res.status(200).json(foundTeam);
     } catch (error) {}
   }
+  async getTeam(req, res) {
+    try {
+      const { id } = req.params;
+      const team = await TeamService.getTeamData(id);
+      res.status(200).json(team);
+    } catch (error) {}
+  }
+  async getAllTeamForUser(req, res) {
+    try {
+      const { id } = req.params;
+      const teams = await TeamMemberService.getTeams(id);
+      res.status(200).json(teams);
+    } catch (error) {}
+  }
 }
 export default new TeamController();
