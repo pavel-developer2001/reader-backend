@@ -1,5 +1,6 @@
 import TeamService from "../../service/team-service/index.js";
 import CoverService from "../../service/cover-service/index.js";
+import TeamMangaService from "../../service/team-manga-service/index.js";
 import TeamMemberService from "../../service/team-member-service/index.js";
 import ApiError from "../../exceptions/api-error/index.js";
 
@@ -38,6 +39,13 @@ class TeamController {
       const { id } = req.params;
       const teams = await TeamMemberService.getTeams(id);
       res.status(200).json(teams);
+    } catch (error) {}
+  }
+  async addMangaForTeam(req, res) {
+    try {
+      const { mangaId, teamId } = req.body;
+      const team = await TeamMangaService.addTeam(mangaId, teamId);
+      res.status(200).json(team);
     } catch (error) {}
   }
 }

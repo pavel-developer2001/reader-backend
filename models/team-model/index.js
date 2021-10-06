@@ -4,6 +4,7 @@ import { ImagesChapterModel } from "../images-chapter-model/index.js";
 import { MangaModel } from "../manga-model/index.js";
 import { ChapterModel } from "../chapter-model/index.js";
 import { TeamMemberModel } from "../team-member-model/index.js";
+import { TeamMangaModel } from "../team-manga-model/index.js";
 
 export const TeamModel = sequelize.define("teams", {
   id: {
@@ -35,14 +36,8 @@ export const TeamModel = sequelize.define("teams", {
     allowNull: false,
   },
 });
-TeamModel.hasMany(ImagesChapterModel);
-ImagesChapterModel.belongsTo(TeamModel);
-
-TeamModel.hasMany(ChapterModel);
-ChapterModel.belongsTo(TeamModel);
-
-TeamModel.hasMany(MangaModel);
-MangaModel.belongsTo(TeamModel);
-
 TeamModel.hasMany(TeamMemberModel);
 TeamMemberModel.belongsTo(TeamModel);
+
+TeamModel.hasMany(TeamMangaModel);
+TeamMangaModel.belongsTo(TeamModel);

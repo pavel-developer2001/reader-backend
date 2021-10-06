@@ -3,6 +3,7 @@ import { TeamModel } from "../../models/team-model/index.js";
 import ApiError from "../../exceptions/api-error/index.js";
 import { TeamMemberModel } from "../../models/team-member-model/index.js";
 import { MangaModel } from "../../models/manga-model/index.js";
+import { TeamMangaModel } from "../../models/team-manga-model/index.js";
 import { UserModel } from "../../models/user-model/index.js";
 
 class TeamService {
@@ -45,7 +46,10 @@ class TeamService {
       where: { teamId: team.id },
       include: [{ model: UserModel }],
     });
-    const mangas = await MangaModel.findAll({ where: { teamId: team.id } });
+    const mangas = await TeamMangaModel.findAll({
+      where: { teamId: team.id },
+      include: [{ model: MangaModel }],
+    });
     return { team, members, mangas };
   }
 }

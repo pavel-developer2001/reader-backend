@@ -8,5 +8,6 @@ router.get("/", TeamController.getTeams);
 router.get("/:id", TeamController.getTeam);
 router.get("/user/:id", TeamController.getAllTeamForUser);
 router.post("/add", upload.single("teamCover"), TeamController.createTeam);
+router.post("/manga/add", TeamController.addMangaForTeam);
 
 export { router };
