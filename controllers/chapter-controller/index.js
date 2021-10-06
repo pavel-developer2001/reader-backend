@@ -2,6 +2,7 @@ import ChapterService from "../../service/chapter-service/index.js";
 import ApiError from "../../exceptions/api-error/index.js";
 import CoverService from "../../service/cover-service/index.js";
 import ImagesChapterService from "../../service/images-chapter-service/index.js";
+import TeamChapterService from "../../service/team-chapter-service/index.js";
 
 class ChapterController {
   async getChapters(req, res) {
@@ -12,10 +13,20 @@ class ChapterController {
   }
   async addChapter(req, res) {
     try {
-      const { numberChapter, volumeChapter, mangaId, userId } = req.body;
+      const {
+        numberChapter,
+        volumeChapter,
+        titleChapter,
+        language,
+        mangaId,
+        userId,
+        teamId,
+      } = req.body;
       const chapter = await ChapterService.newChapter(
         numberChapter,
         volumeChapter,
+        titleChapter,
+        language,
         mangaId,
         userId
       );
@@ -28,6 +39,11 @@ class ChapterController {
           image
         );
       });
+      await TeamChapterService.addChapterForTeam(
+        chapter.id,
+        chapter.mangaId,
+        teamId
+      );
       return res.status(200).json(chapter);
     } catch (error) {}
   }

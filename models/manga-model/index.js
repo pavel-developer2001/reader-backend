@@ -8,6 +8,7 @@ import { GenresModel } from "../genres-model/index.js";
 import { TagsModel } from "../tags-model/index.js";
 import { CommentMangaModel } from "../comment-manga-model/index.js";
 import { TeamMangaModel } from "../team-manga-model/index.js";
+import { TeamChapterModel } from "../team-chapter-model/index.js";
 
 export const MangaModel = sequelize.define("mangas", {
   id: {
@@ -81,3 +82,6 @@ CommentMangaModel.belongsTo(MangaModel);
 
 MangaModel.hasMany(TeamMangaModel);
 TeamMangaModel.belongsTo(MangaModel);
+
+MangaModel.hasMany(TeamChapterModel);
+TeamChapterModel.belongsTo(MangaModel);
