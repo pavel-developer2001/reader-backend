@@ -2,6 +2,7 @@ import TeamService from "../../service/team-service/index.js";
 import CoverService from "../../service/cover-service/index.js";
 import TeamMangaService from "../../service/team-manga-service/index.js";
 import TeamMemberService from "../../service/team-member-service/index.js";
+import TeamInvitationService from "../../service/team-invitation-service/index.js";
 import ApiError from "../../exceptions/api-error/index.js";
 
 class TeamController {
@@ -46,6 +47,59 @@ class TeamController {
       const { mangaId, teamId } = req.body;
       const team = await TeamMangaService.addTeam(mangaId, teamId);
       res.status(200).json(team);
+    } catch (error) {}
+  }
+  async getAllTeamsForManga(req, res) {
+    try {
+      const { id } = req.params;
+      const teams = await TeamMangaService.getTeamsForManga(id);
+      res.status(200).json(teams);
+    } catch (error) {}
+  }
+  async invitationInTeamForUser(req, res) {
+    try {
+      const { rank, teamId, userId } = req.body;
+      const invitation = await TeamInvitationService.invitationInTeam(
+        rank,
+        teamId,
+        userId
+      );
+      res.status(200).json(invitation);
+    } catch (error) {}
+  }
+  async getAllInvitationsForUser(req, res) {
+    try {
+      const { id } = req.params;
+      const invitations = await TeamInvitationService.getInvitationsForUser(id);
+      res.status(200).json(invitations);
+    } catch (error) {}
+  }
+  async agreeToJoinInTeam(req, res) {
+    try {
+      const { invitationId, rank, teamId, userId } = req.body;
+      const newMember = await TeamMemberService.joinToTeam(
+        rank,
+        teamId,
+        userId
+      );
+      const deleteInvitation = await TeamInvitationService.removeInvitation(
+        invitationId
+      );
+      res.status(200).json({ newMember, deleteInvitation });
+    } catch (error) {}
+  }
+  async refusalToJoinTeam(req, res) {
+    try {
+      const { id } = req.params;
+      const deleteInvitial = await TeamInvitationService.removeInvitation(id);
+      res.status(200).json(deleteInvitial);
+    } catch (error) {}
+  }
+  async removeMemberFromTeam(req, res) {
+    try {
+      const { id } = req.params;
+      const member = await TeamMemberService.removeMember(id);
+      res.status(200).json(member);
     } catch (error) {}
   }
 }

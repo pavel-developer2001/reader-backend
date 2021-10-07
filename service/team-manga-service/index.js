@@ -1,5 +1,6 @@
 import ApiError from "../../exceptions/api-error/index.js";
 import { TeamMangaModel } from "../../models/team-manga-model/index.js";
+import { TeamModel } from "../../models/team-model/index.js";
 
 class TeamMangaService {
   async addTeam(mangaId, teamId) {
@@ -12,6 +13,15 @@ class TeamMangaService {
       }
       const team = await TeamMangaModel.create({ mangaId, teamId });
       return team;
+    } catch (error) {}
+  }
+  async getTeamsForManga(id) {
+    try {
+      const teams = await TeamMangaModel.findAll({
+        where: { mangaId: id },
+        include: [{ model: TeamModel }],
+      });
+      return teams;
     } catch (error) {}
   }
 }
