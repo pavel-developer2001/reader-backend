@@ -34,7 +34,10 @@ class ChapterService {
   }
   async getChapters(id) {
     try {
-      const chapters = await ChapterModel.findAll({ where: { mangaId: id } });
+      const chapters = await ChapterModel.findAll({
+        where: { mangaId: id },
+        order: [["id", "DESC"]],
+      });
       return chapters;
     } catch (error) {}
   }

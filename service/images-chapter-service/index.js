@@ -1,6 +1,8 @@
 import { ImagesChapterModel } from "../../models/images-chapter-model/index.js";
 
 import ApiError from "../../exceptions/api-error/index.js";
+import { ChapterModel } from "../../models/chapter-model/index.js";
+import { MangaModel } from "../../models/manga-model/index.js";
 
 class ImagesChapterService {
   async addImage(chapterId, userId, mangaId, imageChapter) {
@@ -18,6 +20,7 @@ class ImagesChapterService {
     try {
       const images = await ImagesChapterModel.findAll({
         where: { chapterId: id },
+        include: [{ model: ChapterModel }, { model: MangaModel }],
       });
       return images;
     } catch (error) {}
